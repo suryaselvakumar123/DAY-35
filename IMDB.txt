@@ -1,0 +1,97 @@
+IMDB Design a DB for IMDB 
+1.Movie should have multiple media(Video or Image) 
+2. Movie can belongs to multiple Genre
+3. Movie can have multiple reviews and Review can belongs to a user
+4. Artist can have multiple skills 
+5. Artist can perform multiple role in a single flim
+
+----------------------------------------------------------------------------------------------
+
+
+
+
+CREATE TABLE Movie (
+  Movie_id INT PRIMARY KEY,
+  Movie_name VARCHAR(255),
+  Movie_artist VARCHAR(255)
+);
+
+
+INSERT INTO Movie (Movie_id, Movie_name, Movie_artist)
+VALUES 
+  (1, 'Inception', 'Leonardo DiCaprio'),
+  (2, 'The Dark Knight', 'Christian Bale'),
+  (3, 'Interstellar', 'Matthew McConaughey'),
+  (4, 'Shawshank Redemption', 'Tim Robbins'),
+  (5, 'Pulp Fiction', 'John Travolta');
+
+
+CREATE TABLE Movie_details (
+    Movie_detail_id INT PRIMARY KEY,
+    Movie_id INT,
+    Media VARCHAR(255)
+);
+
+INSERT INTO Movie_details (Moviedetails_id, Movie_id, Media)
+VALUES 
+    (1, 1, "https://www.imdb.com/title/tt1375666/"),
+    (2, 1, "https://www.imdb.com/title/tt0468569/"),
+    (3, 1, "https://www.imdb.com/title/tt0816692/"),
+    (4, 1, "https://www.imdb.com/title/tt0111161/"),
+    (5, 1, "https://www.imdb.com/title/tt0110912/");
+
+CREATE TABLE Genre (
+    Genre_id INTEGER PRIMARY KEY,
+    Movie_id INTEGER,
+    Movie_genre TEXT 
+);
+
+INSERT INTO Genre (Genre_id, Movie_id, Movie_genre)
+    VALUES(1, 1, "Sci-fi"),
+    VALUES(2, 1, "Action"),
+    VALUES(3, 1, "History"),
+    VALUES(4, 1, "Comedy"),
+    VALUES(5, 1, "Thriller"),
+    VALUES(6, 1, "Romance");
+
+CREATE TABLE Artist(
+    Artist_id INTEGER PRIMARY KEY,
+    Movie_id INTEGER FOREIGN KEY,
+    Skills TEXT,
+    Role VARCHAR
+);
+
+INSERT INTO Artist (Artist_id, Movie_id, Skills, Role)
+    VALUES(1, 1, 'Actor', 'Spy'),
+    VALUES(2, 1, 'Actor', 'Police Officer'),
+    VALUES(3, 1, 'Singing', 'Businessman'),
+    VALUES(4, 1, 'Director', 'Teacher'),
+    VALUES(5, 1, "Music director", "A Sri Lankan Tamil"),
+    VALUES(6, 1, "Producer", "Doctor");
+
+CREATE TABLE Review(
+    Rating_id INTEGER PRIMARY KEY,
+    Rating_name TEXT
+);
+
+INSERT INTO Review (Rating_id, Rating_name)
+    VALUES (1, "Poor"),
+    VALUES (2, "Fair"),
+    VALUES (3, "Good"),
+    VALUES (4, "Very Good"),
+    VALUES (5, "Excellent");
+
+CREATE TABLE User_details(
+    Reviewer_id INTEGER PRIMARY KEY,
+    Movie_id INTEGER FOREIGN KEY,
+    User_name TEXT,
+    User_email VARCHAR,
+    Rating_id INTEGER FOREIGN KEY,
+);
+
+INSERT INTO User_details
+    VALUES(1, 1, "Rajeshwari", "rajeshwari@gmail.com", 4),
+    VALUES(2, 1, "Karthik", "karthik@gmail.com", 3),
+    VALUES(3, 1, "Sneha", "sneha@gmail.com", 2),
+    VALUES(4, 1, "Vishal", "vishal@gmail.com", 4),
+    VALUES(5, 1, "Divya", "divya@gmail.com", 3);
